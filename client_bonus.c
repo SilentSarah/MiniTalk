@@ -6,13 +6,13 @@
 /*   By: hmeftah <hmeftah@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:43:22 by hmeftah           #+#    #+#             */
-/*   Updated: 2022/12/09 15:51:03 by hmeftah          ###   ########.fr       */
+/*   Updated: 2022/12/09 16:36:55 by hmeftah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-t_data	*g_server_data;
+t_data g_server_data;
 
 static void	encoder(int pid, char *string)
 {
@@ -34,6 +34,7 @@ static void	encoder(int pid, char *string)
 			usleep(100);
 			j++;
 		}
+		g_server_data.data_sent++;
 		i++;
 	}
 }
@@ -41,7 +42,7 @@ static void	encoder(int pid, char *string)
 void	handler(int signum)
 {
 	if (signum == SIGUSR1 || signum == SIGUSR2)
-		usleep(1);
+		g_server_data.data_recieved++;
 }
 
 int	main(int argc, char **argv)
@@ -58,17 +59,10 @@ int	main(int argc, char **argv)
 		ft_printf("ERROR: LACK OF ARGUMENTS");
 		exit(1);
 	}
-	g_server_data = malloc(sizeof(t_data) * 1);
-	if (!g_server_data)
-		return (1);
-	g_server_data->string = (char *)malloc(sizeof(char *)
-			* ft_strlen(argv[2]) + 1);
-	if (!g_server_data->string)
-		return (1);
-	ft_strlcpy(g_server_data->string, argv[2], ft_strlen(argv[2]) + 1);
-	g_server_data->server_pid = ft_atoi(argv[1]);
-	encoder(g_server_data->server_pid, g_server_data->string);
-	free(g_server_data->string);
-	free(g_server_data);
+	encoder(ft_atoi(argv[1]), argv[2]);
+	if (g_server_data.data_recieved == g_server_data.data_sent)
+		ft_printf("Message has been sent successfully");
+	else
+		ft_printf("Error: Something lost in transmission");
 	return (0);
 }
