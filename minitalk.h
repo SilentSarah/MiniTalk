@@ -6,7 +6,7 @@
 /*   By: hmeftah <hmeftah@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:06:45 by hmeftah           #+#    #+#             */
-/*   Updated: 2022/12/09 16:30:54 by hmeftah          ###   ########.fr       */
+/*   Updated: 2022/12/10 17:18:08 by hmeftah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ size_t	ft_strlen(const char *str);
 typedef struct server_data {
 	int		data_sent;
 	int		data_recieved;
+	int		c_pid;
 }	t_data;
 #endif
