@@ -6,7 +6,7 @@
 /*   By: hmeftah <hmeftah@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 16:43:22 by hmeftah           #+#    #+#             */
-/*   Updated: 2022/12/09 12:17:25 by hmeftah          ###   ########.fr       */
+/*   Updated: 2022/12/10 11:25:50 by hmeftah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,5 @@ int	main(int argc, char **argv)
 		exit(1);
 	}
 	encoder(ft_atoi(argv[1]), argv[2]);
-	while (1)
-		pause();
 	return (0);
 }
